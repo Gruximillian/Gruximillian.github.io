@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Most frequent array item</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="../lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="../header.css">
+</head>
+<body>
+
+<header class="assignment">
+    <a href="../07_temperature/index.html" class="prev">Temperature converter</a>
+    <a href="../index.html">Index</a>
+    <a href="../09_truncate_string/index.html" class="next">Truncate string</a>
+</header>
+
+<section class="assignment">
+
+    <section class="assignment-info">
+
+        <h1>Assignment 08 - Most frequent array item</h1>
+
+        <p class="assignment-text">
+            Write a JavaScript program to find the most frequent item of an array.<br>
+            Sample array: var arr1 = [3, 'a', 'a', 'a', 2, 3, 'a', 3, 'a', 2, 4, 9, 3];<br>
+            Sample Output: a ( 5 times )
+        </p>
+
+    </section> <!-- End .assignment-info -->
+
+    <p class="instruction">Enter an array of items, separated by comma, in the field below.</p>
+
+    <section class="assignment-app">
+
+        <div class="data">
+
+            <input type="text" placeholder="Enter items here">
+            <button class="count-items">Count items</button>
+
+        </div>
+
+        <div class="result">
+            <p></p>
+        </div>
+
+    </section> <!-- End .assignment-app -->
+
+    <section class="assignment-solution">
+
+        <button class="show-hide">Show solution</button>
+
+        <div class="assignment-code">
+﻿$(document).ready(function() {
+
+    function getArray(input) {
+        var array = $(input).val().split(','); <span class="code-comment">// Split string on comma</span>
+
+        array = array.map(function(current, index, array) {
+            if (current.trim() === '') {
+                return current; <span class="code-comment">// If item is only whitespace, then return untrimmed</span>
+            } else {
+                return current.trim(); <span class="code-comment">// Else, trim whitespaces</span>
+            }
+        });
+
+        return array;
+    }
+
+    function countItemFrequency(array) {
+        var occurences = {},
+            i;
+
+        for (i = 0; i &lt; array.length; i++) {
+
+            if (!occurences.hasOwnProperty(array[i])) {
+                occurences[array[i]] = 1; <span class="code-comment">// If occurences object does not have this array item as own property, add it and set its count to 1</span>
+            } else {
+                occurences[array[i]]++; <span class="code-comment">// If occurences object has this array item as own property, increase its count by 1</span>
+            }
+        }
+
+        return occurences; <span class="code-comment">// Returns an object with array items and their number of occurences as properties</span>
+    }
+
+    function getMostFrequentItem(object) {
+        var mostFrequentItem = null,
+            frequency = 0,
+            item;
+
+        for (item in object) {
+            if (object[item] &gt; frequency) {
+                frequency = object[item];
+                mostFrequentItem = item;
+            }
+        }
+
+        return ('Most frequent item in the array is "' + mostFrequentItem + '", occuring ' + frequency + ' times.');
+    }
+
+    $('.count-items').click(function() {
+        if (!$('.data input').val()) {
+            $('.result p').html('Please enter an array in the field.');
+            return;
+        } else {
+            console.log(JSON.stringify( countItemFrequency( getArray('.data input') ), null, 4) );
+            $('.result p').html( getMostFrequentItem( countItemFrequency( getArray('.data input') ) ) );
+        }
+    });
+
+});
+        </div> <!-- End .assignment-code -->
+
+    </section> <!-- End .assignment-solution -->
+
+</section> <!-- End .assignment -->
+
+<script type="text/javascript">
+    $('button.show-hide').click(function() {
+        $('.assignment-code').toggle('slow');
+        if ($(this).text() === 'Show solution') {
+            $(this).text('Hide solution');
+        } else {
+            $(this).text('Show solution');
+        }
+    });
+</script>
+
+</body>
+</html>

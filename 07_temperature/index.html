@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Temperature converter</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="../lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="../header.css">
+</head>
+<body>
+
+<header class="assignment">
+    <a href="../06_toggle_case/index.html" class="prev">Toggle case</a>
+    <a href="../index.html">Index</a>
+    <a href="../08_most_frequent_array_item/index.html" class="next">Array item</a>
+</header>
+
+<section class="assignment">
+
+    <section class="assignment-info">
+
+        <h1>Assignment 07 - Temperature converter</h1>
+
+        <p class="assignment-text">
+            Write a JavaScript program to convert temperatures to and from celsius, fahrenheit.<br>
+            Formula : c/5 = (f - 32)/9 [where c = temperature in celsius and f = temperature in fahrenheit]<br>
+            Expected output: 60°C is 140°F, 45°F is 7.222222222222222°C.
+        </p>
+
+    </section> <!-- End .assignment-info -->
+
+    <p class="instruction">Enter a temperature value in the desired field to see the coresponding value in the other scale.</p>
+
+    <section class="assignment-app">
+
+        <div class="data">
+
+            <span><input class="celsius" type="text" placeholder="temperature in °C"> °C</span>
+            <span><input class="fahrenheit" type="text" placeholder="temperature in °F"> °F</span>
+
+        </div>
+
+    </section> <!-- End .assignment-app -->
+
+    <section class="assignment-solution">
+
+        <button class="show-hide">Show solution</button>
+
+        <div class="assignment-code">
+$(document).ready(function() {
+
+    function celsiusToFahrenheit(c) {
+        return c * 9 / 5 + 32;
+    }
+
+    function fahrenheitToCelsius(f) {
+        return (f - 32) * 5 / 9;
+    }
+
+    $('.data').on('keyup', 'input', function(event) {
+        var key = event.which,
+            temperature = $(this).val().split(' ').join(''); <span class="code-comment">// Don't allow spaces to be entered</span>
+
+        if (key === 27 || isNaN(temperature) || temperature === '') {
+            if (temperature === '') { <span class="code-comment">// If field is empty, reset both fields</span>
+                $('.celsius').val('');
+                $('.fahrenheit').val('');
+            }
+            return; <span class="code-comment">// On Esc and on entering non number, do nothing</span>
+        }
+
+        temperature = temperature * 1; <span class="code-comment">// Convert temperature string to number</span>
+
+        if ($(this).hasClass('celsius') && parseFloat(temperature) === temperature) {
+            $('.fahrenheit').val(celsiusToFahrenheit(temperature));
+        } else if ($(this).hasClass('fahrenheit')) {
+            $('.celsius').val(fahrenheitToCelsius(temperature));
+        }
+    });
+
+});
+
+        </div> <!-- End .assignment-code -->
+
+    </section> <!-- End .assignment-solution -->
+
+</section> <!-- End .assignment -->
+
+<script type="text/javascript">
+    $('button.show-hide').click(function() {
+        $('.assignment-code').toggle('slow');
+        if ($(this).text() === 'Show solution') {
+            $(this).text('Hide solution');
+        } else {
+            $(this).text('Show solution');
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Time convert</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="../lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="../header.css">
+</head>
+<body>
+
+<header class="assignment">
+    <a href="../17_longest_word_Coderbyte/index.html" class="prev">Longest word</a>
+    <a href="../index.html">Index</a>
+    <a href="../19_alphabet_soup_Coderbyte/index.html" class="next">Alphabet soup</a>
+</header>
+
+<section class="assignment">
+
+    <section class="assignment-info">
+
+        <h1>Assignment 18 CB - Time convert</h1>
+
+        <p class="assignment-text">
+            Have the function <span class="function-name">timeConvert(num)</span> take the num parameter being passed and return the number of hours and minutes the parameter converts to (ie. if num = 63 then the output should be 1:3). Separate the number of hours and minutes with a colon.
+        </p>
+
+    </section> <!-- End .assignment-info -->
+
+    <p class="instruction">Enter an integer in the input field.</p>
+
+    <section class="assignment-app">
+
+        <div class="data">
+
+            <input type="number" placeholder="0">
+            <button class="convert">Convert</button>
+
+        </div>
+
+        <div class="result">
+            <p></p>
+        </div>
+
+    </section> <!-- End .assignment-app -->
+
+    <section class="assignment-solution">
+
+        <button class="show-hide">Show solution</button>
+
+        <div class="assignment-code">
+﻿$(document).ready(function() {
+
+    function getNumber(input) {
+        var num = $(input).val();
+        if (num === '') return;
+        return Math.abs(num * 1);
+    }
+
+    function timeConvert(num) {
+        var h = 0,
+            m = 0,
+            time = '';
+        if (num &lt; 60) {
+            time = '0:' + num;
+        } else {
+            m = num % 60;
+            h = parseInt(num / 60);
+            time = h + ':' + m;
+        }
+        return time;
+    }
+
+    $('.convert').click(function() {
+        var num = getNumber('.data input');
+        if (isNaN(num)) {
+            $('.result p').html('Please enter an integer in the field.');
+        } else {
+            $('.result p').html('Your time is: &lt;span&gt;' + timeConvert(num) + '&lt;/span&gt;');
+        }
+    });
+
+});
+        </div> <!-- End .assignment-code -->
+
+    </section> <!-- End .assignment-solution -->
+
+</section> <!-- End .assignment -->
+
+<script type="text/javascript">
+    $('button.show-hide').click(function() {
+        $('.assignment-code').toggle('slow');
+        if ($(this).text() === 'Show solution') {
+            $(this).text('Hide solution');
+        } else {
+            $(this).text('Show solution');
+        }
+    });
+</script>
+
+</body>
+</html>

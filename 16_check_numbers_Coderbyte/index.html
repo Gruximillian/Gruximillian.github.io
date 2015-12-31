@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment name</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="../lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="../header.css">
+</head>
+<body>
+
+<header class="assignment">
+    <a href="../15_simple_symbols_Coderbyte/index.html" class="prev">Simple symbols</a>
+    <a href="../index.html">Index</a>
+    <a href="../17_longest_word_Coderbyte/index.html" class="next">Longest word</a>
+</header>
+
+<section class="assignment">
+
+    <section class="assignment-info">
+
+        <h1>Assignment 16 CB - Check numbers</h1>
+
+        <p class="assignment-text">
+            Have the function <span class="function-name">checkNums(num1, num2)</span> take both parameters being passed and return the string true if num2 is greater than num1, otherwise return the string false. If the parameter values are equal to each other then return the string -1.
+        </p>
+
+    </section> <!-- End .assignment-info -->
+
+    <p class="instruction">Enter numbers in the fields to determine if second number is greater than the first.</p>
+
+    <section class="assignment-app">
+
+        <div class="data">
+
+            <input type="text" class="number number1" placeholder="Number 1"><br>
+            <input type="text" class="number number2" placeholder="Number 2">
+            <button class="compare">Compare</button>
+
+        </div>
+
+        <div class="result">
+            <p></p>
+        </div>
+
+    </section> <!-- End .assignment-app -->
+
+    <section class="assignment-solution">
+
+        <button class="show-hide">Show solution</button>
+
+        <div class="assignment-code">
+﻿$(document).ready(function() {
+
+    function getNums(data) {
+        var num1 = $(data).find('.number1').val(),
+            num2 = $(data).find('.number2').val();
+        if (num1 === '' || num2 === '' || isNaN(num1 * 1) || isNaN(num2 * 1)) {
+            return false;
+        } else {
+            return [num1 * 1, num2 * 1];
+        }
+    }
+
+    function checkNums(array) {
+        var num1 = array[0],
+            num2 = array[1];
+        if (num2 > num1) {
+            return true;
+        } else if (num2 === num1) {
+            return -1;
+        } else return false;
+    }
+
+    $('.compare').click(function() {
+        if (getNums('.data')) {
+            $('.result p').html('Number 2 is greater than number 1: &lt;span&gt;' + checkNums(getNums('.data')) + '&lt;/span&gt;');
+        } else {
+            $('.result p').html('Please enter numbers in the fields on the left.');
+        }
+    });
+
+});
+        </div> <!-- End .assignment-code -->
+
+    </section> <!-- End .assignment-solution -->
+
+</section> <!-- End .assignment -->
+
+<script type="text/javascript">
+    $('button.show-hide').click(function() {
+        $('.assignment-code').toggle('slow');
+        if ($(this).text() === 'Show solution') {
+            $(this).text('Hide solution');
+        } else {
+            $(this).text('Show solution');
+        }
+    });
+</script>
+
+</body>
+</html>

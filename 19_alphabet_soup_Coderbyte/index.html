@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Alphabet soup</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="../lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="../header.css">
+</head>
+<body>
+
+<header class="assignment">
+    <a href="../18_time_convert_Coderbyte/index.html" class="prev">Time convert</a>
+    <a href="../index.html">Index</a>
+    <a href="../20_ab_check_Coderbyte/index.html" class="next">AB Check</a>
+</header>
+
+<section class="assignment">
+
+    <section class="assignment-info">
+
+        <h1>Assignment 19 CB - Alphabet soup</h1>
+
+        <p class="assignment-text">
+            Have the function <span class="function-name">alphabetSoup(str)</span> take the str string parameter being passed and return the string with the letters in alphabetical order (ie. hello becomes ehllo). Assume numbers and punctuation symbols will not be included in the string.
+        </p>
+
+    </section> <!-- End .assignment-info -->
+
+    <p class="instruction">Enter a string in the field below.</p>
+
+    <section class="assignment-app">
+
+        <div class="data">
+
+            <input type="text" placeholder="Enter a string">
+            <button class="sort">Sort string</button>
+
+        </div>
+
+        <div class="result">
+            <p></p>
+        </div>
+
+    </section> <!-- End .assignment-app -->
+
+    <section class="assignment-solution">
+
+        <button class="show-hide">Show solution</button>
+
+        <div class="assignment-code">
+﻿$(document).ready(function() {
+
+    String.prototype.removeCharAtIndex = function(index) { <span class="code-comment">// Removes character at given index from a string</span>
+        var subString1 = '',
+            subString2 = '';
+
+        subString1 = this.substring(0, index); <span class="code-comment">// Substring to the left of the removed character</span>
+        subString2 = this.substring(index + 1); <span class="code-comment">// Substring to the right of the removed character</span>
+        return subString1 + subString2;
+    }
+
+    function alphabetSoup(str) {
+        var newStr = '',
+            tempChar, <span class="code-comment">// Character that is alphabetically first in a given string</span>
+            tempIndex, <span class="code-comment">// Index of a previous character</span>
+            len = str.length;
+
+        while (len > 0) { <span class="code-comment">// Until string is emptied search for the alphabetically smallest character</span>
+            tempChar = str.charAt(0); <span class="code-comment">// Assume that first character in a string is alphabetically smallest</span>
+            for (var i = 0; i &lt; len; i++) { <span class="code-comment">// Go throught the characters in a string</span>
+                if (str.charAt(i) &lt;= tempChar) { <span class="code-comment">// If another character is alphabetically before tempChar</span>
+                    tempChar = str.charAt(i); <span class="code-comment">// Assign that character to the tempChar,</span>
+                    tempIndex = i; <span class="code-comment">// and save the index of that character</span>
+                }
+            }
+            str = str.removeCharAtIndex(tempIndex); <span class="code-comment">// Remove alphabetically first character from a string by its index</span>
+            newStr += tempChar; <span class="code-comment">// Add removed character to the new string</span>
+            len--; <span class="code-comment">// Reduce len because str.length is reduced by 1 and go throught the reduced string again</span>
+        }
+        return newStr;
+    }
+
+    function alphabetSoupRecursive(str) {
+        var len = str.length,
+            tempChar, <span class="code-comment">// Character that is alphabetically first in a given string</span>
+            tempIndex; <span class="code-comment">// Index of a previous character</span>
+
+        if (len === 1) {
+            return str; <span class="code-comment">// If there is only one character left in the starting string, then add it to the resulting string</span>
+        } else {
+            tempChar = str.charAt(0); <span class="code-comment">// Assume that first character in a string is alphabetically smallest</span>
+            for (var i = 0; i &lt; len; i++) { <span class="code-comment">// Go throught the characters in a string</span>
+                if (str.charAt(i) &lt;= tempChar) { <span class="code-comment">// If another character is alphabetically before tempChar</span>
+                    tempChar = str.charAt(i); <span class="code-comment">// Assign that character to the tempChar,</span>
+                    tempIndex = i; <span class="code-comment">// and save the index of that character</span>
+                }
+            }
+            str = str.removeCharAtIndex(tempIndex); <span class="code-comment">// Remove alphabetically first character from a string by its index</span>
+            <span class="code-comment">//str = str.substring(0, tempIndex) + str.substring(tempIndex + 1);  <span class="code-comment">// Same as the above, but without using .removeCharAtIndex() method</span></span>
+            return tempChar + alphabetSoupRecursive(str); <span class="code-comment">// Return alphabetically smallest character and go throught the reduced string again</span>
+        }
+    }
+
+    $('.sort').click(function() {
+        var string = $('.data input').val(),
+            message = '';
+        if (string === '') {
+            message = 'Please enter a string in the field.';
+        } else {
+            message = 'Alphabetized string is: &lt;span&gt;' + alphabetSoupRecursive(string) + '&lt;/span&gt;';
+        }
+        $('.result p ').html(message);
+    });
+
+});
+        </div> <!-- End .assignment-code -->
+
+    </section> <!-- End .assignment-solution -->
+
+</section> <!-- End .assignment -->
+
+<script type="text/javascript">
+    $('button.show-hide').click(function() {
+        $('.assignment-code').toggle('slow');
+        if ($(this).text() === 'Show solution') {
+            $(this).text('Hide solution');
+        } else {
+            $(this).text('Show solution');
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamic Object Properties</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="../lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+</head>
+<body>
+
+<section class="assignment">
+
+    <section class="assignment-info">
+
+        <h1>Assignment 00 - Dynamic Adding of Object Properties</h1>
+
+        <p class="assignment-text">This is a program that adds user defined properties to an object. Just to see if it is possible.</p>
+
+    </section> <!-- End .assignment-info -->
+
+    <p class="instruction">Enter the name and value of a property to be added.</p>
+
+    <section class="assignment-app">
+
+        <div class="data">
+
+            <input class="property property-name" type="text" placeholder="Property name"><br>
+            <input class="property property-value" type="text" placeholder="Property value">
+            <button class="add-property">Add property</button>
+
+        </div>
+
+        <div class="result">
+            <p></p>
+        </div>
+
+    </section> <!-- End .assignment-app -->
+
+    <section class="assignment-solution">
+
+        <button class="show-hide">Show solution</button>
+
+        <div class="assignment-code">
+$(document).ready(function() {
+
+    var testObject = {
+            creator: 'Vojislav Grujic',
+            language: 'JavaScript'
+        };
+
+    testObject.addProperty = function(property) {
+        <span class="code-comment">// property is property object returned by function getProperty()</span>
+        var propertyName = property.propertyName,
+            propertyValue = property.propertyValue;
+        this[propertyName] = propertyValue;
+    }
+
+    function getProperty(elements) {
+        var propertyName = $(elements).find('.property-name').val(),
+            propertyValue = $(elements).find('.property-value').val(),
+            propertyObject = {};
+
+        propertyObject.propertyName = propertyName;
+        propertyObject.propertyValue = propertyValue;
+        if (propertyName === '') return;
+
+        return propertyObject;
+    }
+
+<span class="code-comment">/**********************************************************************/</span>
+<span class="code-comment">/*****            EVENT HANDLING AND CONVENIENCE CODE             *****/</span>
+<span class="code-comment">/**********************************************************************/</span>
+
+    $('.add-property').click(function() {
+        testObject.addProperty(getProperty('.data'));
+        $('.result p').html(JSON.stringify(testObject, null, 4));
+        $('.assignment-app').css({'height': $('.result p').css('height')});
+    });
+
+});
+        </div> <!-- End .assignment-code -->
+
+    </section> <!-- End .assignment-solution -->
+
+</section> <!-- End .assignment -->
+
+<script type="text/javascript">
+    $('button.show-hide').click(function() {
+        $('.assignment-code').toggle('slow');
+        if ($(this).text() === 'Show solution') {
+            $(this).text('Hide solution');
+        } else {
+            $(this).text('Show solution');
+        }
+    });
+</script>
+
+</body>
+</html>

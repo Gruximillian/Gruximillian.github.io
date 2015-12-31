@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Number Dash</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="../lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="../header.css">
+</head>
+<body>
+
+<header class="assignment">
+    <a href="../04_evaluate_expression/index.html" class="prev">Evaluate expression</a>
+    <a href="../index.html">Index</a>
+    <a href="../06_toggle_case/index.html" class="next">Toggle case</a>
+</header>
+
+<section class="assignment">
+
+    <section class="assignment-info">
+
+        <h1>Assignment 05 - Number Dash</h1>
+
+        <p class="assignment-text">Write a JavaScript program that accepts a number as input and insert 
+dashes (-) between each two even numbers. For example if you accept 025468 the output 
+should be 0-254-6-8.</p>
+
+    </section> <!-- End .assignment-info -->
+
+    <p class="instruction">Enter an integer in the filed below so I can dash it!</p>
+
+    <section class="assignment-app">
+
+        <div class="data">
+
+            <input type="text" placeholder="Enter a number">
+            <button class="dash-it">Dash it!</button>
+
+        </div>
+
+        <div class="result">
+            <p></p>
+        </div>
+
+    </section> <!-- End .assignment-app -->
+
+    <section class="assignment-solution">
+
+        <button class="show-hide">Show solution</button>
+
+        <div class="assignment-code">
+﻿$(document).ready(function() {
+
+    function numberDash(number) {
+        var dashedNumber = number.split(' ').join('').split(''); <span class="code-comment">// Split on spaces, then join array, and then split again to strip all the white spaces</span>
+
+        dashedNumber = dashedNumber.map(function(element, index, dashedNumber) {
+            return element * 1; <span class="code-comment">// Turn elements of the array into numbers</span>
+        });
+
+        for (var i = 0; i &lt; dashedNumber.length - 1; i++) {
+            if (dashedNumber[i] % 2 === 0 && dashedNumber[i + 1] % 2 === 0) {
+                for (var j = dashedNumber.length; j &gt; i; j--) {
+                    dashedNumber[j] = dashedNumber[j - 1]; <span class="code-comment">// If two adjacent digits are even then push all elements after first digit one position higher</span>
+                }
+                dashedNumber[i + 1] = '-'; <span class="code-comment">// Then add a dash after the first even digit</span>
+            }
+        }
+
+        return dashedNumber.join(''); <span class="code-comment">// Finaly, join array into string</span>
+    }
+
+    function numberIsInteger(numberString) {
+        var number = numberString.split(' ').join('') * 1; <span class="code-comment">// Split on spaces, then join array and then convert to number</span>
+        numberString = numberString.split(' ').join(''); <span class="code-comment">// Split on spaces, then join array</span>
+        return (parseInt(number) === number && numberString); <span class="code-comment">// Is number an integer and not an empty string</span>
+    }
+
+    $('.dash-it').click(function() {
+        var number = $('.data input').val(),
+            message;
+
+        if (numberIsInteger(number)) {
+            message = 'Your dashed number is: &lt;span&gt;' + numberDash(number) + '&lt;/span&gt;.'
+        } else {
+            message = 'Please enter an integer first.';
+        }
+        $('.result p').html(message);
+    });
+
+});
+        </div> <!-- End .assignment-code -->
+
+    </section> <!-- End .assignment-solution -->
+
+</section> <!-- End .assignment -->
+
+<script type="text/javascript">
+    $('button.show-hide').click(function() {
+        $('.assignment-code').toggle('slow');
+        if ($(this).text() === 'Show solution') {
+            $(this).text('Hide solution');
+        } else {
+            $(this).text('Show solution');
+        }
+    });
+</script>
+
+</body>
+</html>

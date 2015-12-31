@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Array addition I</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="../lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="../header.css">
+</head>
+<body>
+
+<header class="assignment">
+    <a href="../25_arith_geo_Coderbyte/index.html" class="prev">Arith Geo</a>
+    <a href="../index.html">Index</a>
+    <a href="../index.html" class="next">Next</a>
+</header>
+
+<section class="assignment">
+
+    <section class="assignment-info">
+
+        <h1>Assignment 26 CB - Array addition I</h1>
+
+        <p class="assignment-text">Define a function <span class="function-name">sum()</span> and a function <span class="function-name">multiply()</span> that sums and multiplies
+(respectively) all the numbers in an array of numbers. For example, sum([1,2,3,4]) should
+return 10, and multiply([1,2,3,4]) should return 24.</p>
+
+    </section> <!-- End .assignment-info -->
+
+    <p class="instruction">Enter an array of numbers in the field below.</p>
+
+    <section class="assignment-app">
+
+        <div class="data">
+
+            <input type="text" placeholder="Enter arry of numbers">
+            <button class="check">Check array</button>
+
+        </div>
+
+        <div class="result">
+            <p></p>
+        </div>
+
+    </section> <!-- End .assignment-app -->
+
+    <section class="assignment-solution">
+
+        <button class="show-hide">Show solution</button>
+
+        <div class="assignment-code">
+
+            <span class="code-comment">// Comments in code</span>
+
+        </div> <!-- End .assignment-code -->
+
+    </section> <!-- End .assignment-solution -->
+
+</section> <!-- End .assignment -->
+
+<script type="text/javascript">
+    $('button.show-hide').click(function() {
+        $('.assignment-code').toggle('slow');
+        if ($(this).text() === 'Show solution') {
+            $(this).text('Hide solution');
+        } else {
+            $(this).text('Show solution');
+        }
+    });
+</script>
+
+</body>
+</html>

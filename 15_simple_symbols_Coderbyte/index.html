@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Simple symbols</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="../lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="../header.css">
+</head>
+<body>
+
+<header class="assignment">
+    <a href="../14_capitalize_words_Coderbyte/index.html" class="prev">Capitalize</a>
+    <a href="../index.html">Index</a>
+    <a href="../16_check_numbers_Coderbyte/index.html" class="next">Check numbers</a>
+</header>
+
+<section class="assignment">
+
+    <section class="assignment-info">
+
+        <h1>Assignment 15 CB - Simple symbols</h1>
+
+        <p class="assignment-text">
+            Using the JavaScript language, have the function <span class="function-name">simpleSymbols(str)</span> take the str parameter being passed and determine if it is an acceptable sequence by either returning the string true or false. The str parameter will be composed of + and = symbols with several letters between them (ie. ++d+===+c++==a) and for the string to be true each letter must be surrounded by a + symbol. So the string to the left would be false. The string will not be empty and will have at least one letter.</p>
+
+    </section> <!-- End .assignment-info -->
+
+    <p class="instruction">Enter a string to test.</p>
+
+    <section class="assignment-app">
+
+        <div class="data">
+
+            <input type="text" placeholder="Enter a string">
+            <button class="test-string">Test string</button>
+
+        </div>
+
+        <div class="result">
+            <p></p>
+        </div>
+
+    </section> <!-- End .assignment-app -->
+
+    <section class="assignment-solution">
+
+        <button class="show-hide">Show solution</button>
+
+        <div class="assignment-code">
+﻿$(document).ready(function() {
+
+    function simpleSymbols(str) {
+        var len = str.length,
+            correct = true;
+        str = str.split('');
+        for (var i = 0; i &lt; len; i++) {
+            if (str[i].match(/[a-z]/i) && (str[i - 1] !== '+' || str[i + 1] !== '+') ) {
+                correct = false;
+            }
+        }
+        return correct; 
+    }
+
+    $('.test-string').click(function() {
+        var string = $('.data input').val();
+        if (string === '') {
+            $('.result p').html('Please enter a string in the input field.');
+        } else {
+            $('.result p').html('String you entered is: &lt;span&gt;' + simpleSymbols(string) + '&lt;/span&gt;');
+        }
+    });
+
+});
+        </div> <!-- End .assignment-code -->
+
+    </section> <!-- End .assignment-solution -->
+
+</section> <!-- End .assignment -->
+
+<script type="text/javascript">
+    $('button.show-hide').click(function() {
+        $('.assignment-code').toggle('slow');
+        if ($(this).text() === 'Show solution') {
+            $(this).text('Hide solution');
+        } else {
+            $(this).text('Show solution');
+        }
+    });
+</script>
+
+</body>
+</html>

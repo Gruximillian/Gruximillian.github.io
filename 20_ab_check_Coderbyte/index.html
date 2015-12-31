@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>AB Check</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="../lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="../header.css">
+</head>
+<body>
+
+<header class="assignment">
+    <a href="../19_alphabet_soup_Coderbyte/index.html" class="prev">Alphabet soup</a>
+    <a href="../index.html">Index</a>
+    <a href="../21_vowel_count_Coderbyte/index.html" class="next">Vowel count</a>
+</header>
+
+<section class="assignment">
+
+    <section class="assignment-info">
+
+        <h1>Assignment 20 CB - AB Check</h1>
+
+        <p class="assignment-text">
+            Have the function <span class="function-name">abCheck(str)</span> take the str parameter being passed and return the string true if the characters a and b are separated by exactly 3 places anywhere in the string at least once (ie. "lane borrowed" would result in true because there is exactly three characters between a and b). Otherwise return the string false.
+        </p>
+
+    </section> <!-- End .assignment-info -->
+
+    <p class="instruction">Enter a string in the field below.</p>
+
+    <section class="assignment-app">
+
+        <div class="data">
+
+            <input type="text" placeholder="Enter a string">
+            <button class="check">Check string</button>
+
+        </div>
+
+        <div class="result">
+            <p></p>
+        </div>
+
+    </section> <!-- End .assignment-app -->
+
+    <section class="assignment-solution">
+
+        <button class="show-hide">Show solution</button>
+
+        <div class="assignment-code">
+﻿$(document).ready(function() {
+
+    function abCheck(str) { 
+        var len = str.length;
+
+        str = str.split('');
+        for (var i = 0; i &lt; len; i++) {
+            if (str[i] === 'a') { <span class="code-comment">// First find 'a' in the string</span>
+                for (var j = 0; j &lt; len; j++) { <span class="code-comment">// Then serach for 'b'</span>
+                    if (str[j] === 'b' && Math.abs(j - i) === 4) return true; <span class="code-comment">// If 'b' is found, check if there are three characters between 'a' and 'b', if so, return true</span>
+                }
+            }
+        }
+        return false; <span class="code-comment">// If 'a' and 'b' are not found or they are not separated by exactly 3 characters, then return false</span>
+    }
+
+    $('.check').click(function() {
+        var string = $('.data input').val(),
+            message = '';
+        if (string === '') {
+            message = 'Please enter a string in the field.';
+        } else {
+            message = 'Result of checking a string is: &lt;span&gt;' + abCheck(string) + '&lt;/span&gt;';
+        }
+        $('.result p ').html(message);
+    });
+
+});
+        </div> <!-- End .assignment-code -->
+
+    </section> <!-- End .assignment-solution -->
+
+</section> <!-- End .assignment -->
+
+<script type="text/javascript">
+    $('button.show-hide').click(function() {
+        $('.assignment-code').toggle('slow');
+        if ($(this).text() === 'Show solution') {
+            $(this).text('Hide solution');
+        } else {
+            $(this).text('Show solution');
+        }
+    });
+</script>
+
+</body>
+</html>

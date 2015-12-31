@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Arith Geo</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="../lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="../header.css">
+</head>
+<body>
+
+<header class="assignment">
+    <a href="../24_palindrome_Coderbyte/index.html" class="prev">Palindrome</a>
+    <a href="../index.html">Index</a>
+    <a href="../26_array_addition_Coderbyte/index.html" class="next">Array addition</a>
+</header>
+
+<section class="assignment">
+
+    <section class="assignment-info">
+
+        <h1>Assignment 25 CB - Arith Geo</h1>
+
+        <p class="assignment-text">
+          Have the function <span class="function-name">arithGeo(arr)</span> take the array of numbers stored in arr and return the string "Arithmetic" if the sequence follows an arithmetic pattern or return "Geometric" if it follows a geometric pattern. If the sequence doesn't follow either pattern return -1. An arithmetic sequence is one where the difference between each of the numbers is consistent, where as in a geometric sequence, each term after the first is multiplied by some constant or common ratio. Arithmetic example: [2, 4, 6, 8] and Geometric example: [2, 6, 18, 54]. Negative numbers may be entered as parameters, 0 will not be entered, and no array will contain all the same elements.
+        </p>
+
+    </section> <!-- End .assignment-info -->
+
+    <p class="instruction">Enter some numbers, separated by comma, in the field below.</p>
+
+    <section class="assignment-app">
+
+        <div class="data">
+
+            <input type="text" placeholder="Enter an array of numbers">
+            <button class="check">Check array</button>
+
+        </div>
+
+        <div class="result">
+            <p></p>
+        </div>
+
+    </section> <!-- End .assignment-app -->
+
+    <section class="assignment-solution">
+
+        <button class="show-hide">Show solution</button>
+
+        <div class="assignment-code">
+﻿$(document).ready(function() {
+
+  function getArray(element) {
+    element = element.split(',');
+    element = element.map(function(current, index, element) {
+      return current.trim();
+    });
+    return element; <span class="code-comment">// Returns trimmed array</span>
+  }
+
+  function arithGeo(arr) {
+    var arithFactor = arr[1] - arr[0],
+        geomFactor = arr[1] / arr[0],
+        message = 'Arithmetic',
+        len = arr.length,
+        i;
+    for (i = 0; i &lt; len - 1; i++) {
+      if (arithFactor === arr[i + 1] - arr[i] && message === 'Arithmetic') { <span class="code-comment">// First check if it is arithmetic</span>
+	      message = 'Arithmetic';
+      } else message = 'Geometric'; <span class="code-comment">// If not, assum it is geometric</span>
+    }
+    for (i = 0; i &lt; len - 1; i++) {
+      if (geomFactor === arr[i + 1] / arr[i] && message === 'Geometric') { <span class="code-comment">// Check if it is geometric</span>
+	      message = 'Geometric';
+      } else if (message !== 'Arithmetic') { <span class="code-comment">// If not, and not arithmetic, then return -1</span>
+	      message = -1;
+      };
+    }
+    return message;
+  }
+
+  $('.check').click(function() {
+    var element = $('.data input').val(),
+        message = '';
+    if (element === '') {
+      message = 'Please enter a string in the field.';
+    } else {
+      message = 'Array is: &lt;span&gt;' + arithGeo(getArray(element)) + '&lt;/span&gt;';
+    }
+    $('.result p ').html(message);
+  });
+
+});
+        </div> <!-- End .assignment-code -->
+
+    </section> <!-- End .assignment-solution -->
+
+</section> <!-- End .assignment -->
+
+<script type="text/javascript">
+    $('button.show-hide').click(function() {
+        $('.assignment-code').toggle('slow');
+        if ($(this).text() === 'Show solution') {
+            $(this).text('Hide solution');
+        } else {
+            $(this).text('Show solution');
+        }
+    });
+</script>
+
+</body>
+</html>

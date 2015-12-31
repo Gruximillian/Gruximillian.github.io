@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Simple adding</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="../lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="../header.css">
+</head>
+<body>
+
+<header class="assignment">
+    <a href="../12_factorial_Coderbyte/index.html" class="prev">Factorial</a>
+    <a href="../index.html">Index</a>
+    <a href="../14_capitalize_words_Coderbyte/index.html" class="next">Capitalize</a>
+</header>
+
+<section class="assignment">
+
+    <section class="assignment-info">
+
+        <h1>Assignment 13 CB - Simple adding</h1>
+
+        <p class="assignment-text">
+            Have the function <span class="function-name">simpleAdding(num)</span> add up all the numbers from 1 to num. For the test cases, the parameter num will be any number from 1 to 1000.
+        </p>
+
+    </section> <!-- End .assignment-info -->
+
+    <p class="instruction">Enter an positive integer in the input field below.</p>
+
+    <section class="assignment-app">
+
+        <div class="data">
+
+            <input type="text" placeholder="Enter an integer here">
+            <button class="calculate">Calculate</button>
+
+        </div>
+
+        <div class="result">
+            <p></p>
+        </div>
+
+    </section> <!-- End .assignment-app -->
+
+    <section class="assignment-solution">
+
+        <button class="show-hide">Show solution</button>
+
+        <div class="assignment-code">
+﻿$(document).ready(function() {
+
+    function simpleAdding(num) {
+        if (num === 0) {
+            return num;
+        } else {
+            return num + simpleAdding(num - 1); 
+        }
+    }
+
+    $('.calculate').click(function() {
+        var numString = $('.data input').val(),
+            numValue = numString * 1;
+        if (numString === '' || isNaN(numValue) || parseInt(numValue) !== numValue || parseInt(numValue) &lt; 0) {
+            $('.result p').html('Please enter an positive integer in the input field.');
+        } else {
+            $('.result p').html('Numbers from 1 to ' + numValue + ', add up to: &lt;span&gt;' + simpleAdding(numValue) + '&lt;/span&gt;');
+        }
+    });
+
+});
+        </div> <!-- End .assignment-code -->
+
+    </section> <!-- End .assignment-solution -->
+
+</section> <!-- End .assignment -->
+
+<script type="text/javascript">
+    $('button.show-hide').click(function() {
+        $('.assignment-code').toggle('slow');
+        if ($(this).text() === 'Show solution') {
+            $(this).text('Hide solution');
+        } else {
+            $(this).text('Show solution');
+        }
+    });
+</script>
+
+</body>
+</html>  

@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Capitalize words</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="../lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="../header.css">
+</head>
+<body>
+
+<header class="assignment">
+    <a href="../13_simple_adding_Coderbyte/index.html" class="prev">Simple adding</a>
+    <a href="../index.html">Index</a>
+    <a href="../15_simple_symbols_Coderbyte/index.html" class="next">Simple symbol</a>
+</header>
+
+<section class="assignment">
+
+    <section class="assignment-info">
+
+        <h1>Assignment 14 CB - Capitalize words</h1>
+
+        <p class="assignment-text">
+            Have the function <span class="function-name">letterCapitalize(str)</span> take the str parameter being passed and capitalize the first letter of each word. Words will be separated by only one space.
+        </p>
+
+    </section> <!-- End .assignment-info -->
+
+    <p class="instruction">Enter an sentence in the input field below.</p>
+
+    <section class="assignment-app">
+
+        <div class="data">
+
+            <input type="text" placeholder="Enter an sentence">
+            <button class="capitalize">Capitalize</button>
+
+        </div>
+
+        <div class="result">
+            <p></p>
+        </div>
+
+    </section> <!-- End .assignment-app -->
+
+    <section class="assignment-solution">
+
+        <button class="show-hide">Show solution</button>
+
+        <div class="assignment-code">
+﻿$(document).ready(function() {
+
+    function letterCapitalize(str) { 
+        str = str.toString().split(' ');
+        str = str.map(function(current, index, str) {
+            if (current === '') return current;
+            current = current.split('');
+            current[0] = current[0].toUpperCase();
+            return current = current.join('');
+        });
+        return str.join(' '); 
+    }
+
+    $('.capitalize').click(function() {
+        var text = $('.data input').val();
+        if (text === '' || !isNaN(text)) {
+            $('.result p').html('Please enter some text in the field.');
+        } else {
+            $('.result p').html('Capitalized sentence is: &lt;span&gt;' + letterCapitalize(text) + '&lt;/span&gt;');
+        }
+    });
+
+});
+        </div> <!-- End .assignment-code -->
+
+    </section> <!-- End .assignment-solution -->
+
+</section> <!-- End .assignment -->
+
+<script type="text/javascript">
+    $('button.show-hide').click(function() {
+        $('.assignment-code').toggle('slow');
+        if ($(this).text() === 'Show solution') {
+            $(this).text('Hide solution');
+        } else {
+            $(this).text('Show solution');
+        }
+    });
+</script>
+
+</body>
+</html>

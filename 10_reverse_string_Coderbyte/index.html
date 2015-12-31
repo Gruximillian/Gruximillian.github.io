@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Reverse String</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="../lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="../header.css">
+</head>
+<body>
+
+<header class="assignment">
+    <a href="../09_truncate_string/index.html" class="prev">Truncate string</a>
+    <a href="../index.html">Index</a>
+    <a href="../11_change_string_letters_Coderbyte/index.html" class="next">Change letters</a>
+</header>
+
+<section class="assignment">
+
+    <section class="assignment-info">
+
+        <h1>Assignment 01 CB - Reverse String</h1>
+
+        <p class="assignment-text">Have the function <span class="function-name">firstReverse(str)</span> take the str parameter being passed and return the string in reversed order.</p>
+
+    </section> <!-- End .assignment-info -->
+
+    <p class="instruction">Enter a string to reverse it.</p>
+
+    <section class="assignment-app">
+
+        <div class="data">
+
+            <input type="text" placeholder="Enter string">
+            <button class="reverse">Reverse it!</button>
+
+        </div>
+
+        <div class="result">
+            <p></p>
+        </div>
+
+    </section> <!-- End .assignment-app -->
+
+    <section class="assignment-solution">
+
+        <button class="show-hide">Show solution</button>
+
+        <div class="assignment-code">
+﻿$(document).ready(function() {
+
+    function firstReverse(str) { 
+	    var len,
+            temp;
+        str = str.toString().split('');
+        len = str.length;
+        for (var i = 0; i &lt;len / 2; i++) {
+            temp = str[i];
+            str[i] = str[len - 1 - i];
+            str[len - 1 - i] = temp;
+        }
+        return str.join(''); 
+    }
+
+    function getString(element) {
+        return $(element).val();
+    }
+
+<span class="code-comment">/**********************************************************************/</span>
+<span class="code-comment">/*****            EVENT HANDLING AND CONVENIENCE CODE             *****/</span>
+<span class="code-comment">/**********************************************************************/</span>
+
+    $('.reverse').click(function() {
+        $('.result p').html('Reversed string is: &lt;span&gt;' + firstReverse(getString('.data input')) + '&lt;/span&gt;');
+    });
+
+});
+        </div> <!-- End .assignment-code -->
+
+    </section> <!-- End .assignment-solution -->
+
+</section> <!-- End .assignment -->
+
+<script type="text/javascript">
+    $('button.show-hide').click(function() {
+        $('.assignment-code').toggle('slow');
+        if ($(this).text() === 'Show solution') {
+            $(this).text('Hide solution');
+        } else {
+            $(this).text('Show solution');
+        }
+    });
+</script>
+
+</body>
+</html>

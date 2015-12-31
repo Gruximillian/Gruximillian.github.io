@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vowel count</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="../lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="../header.css">
+</head>
+<body>
+
+<header class="assignment">
+    <a href="../20_ab_check_Coderbyte/index.html" class="prev">AB Check</a>
+    <a href="../index.html">Index</a>
+    <a href="../22_word_count_Coderbyte/index.html" class="next">Word count</a>
+</header>
+
+<section class="assignment">
+
+    <section class="assignment-info">
+
+        <h1>Assignment 21 CB - Vowel count</h1>
+
+        <p class="assignment-text">
+            Using the JavaScript language, have the function <span class="function-name">vowelCount(str)</span> take the str string parameter being passed and return the number of vowels the string contains (ie. "All cows eat grass" would return 5). Do not count y as a vowel for this challenge.
+        </p>
+
+    </section> <!-- End .assignment-info -->
+
+    <p class="instruction">Enter some numbers, separated by comma, in the field below to calculate their sum and product.</p>
+
+    <section class="assignment-app">
+
+        <div class="data">
+
+            <input type="text" placeholder="Enter a string">
+            <button class="count">Count vowels</button>
+
+        </div>
+
+        <div class="result">
+            <p></p>
+        </div>
+
+    </section> <!-- End .assignment-app -->
+
+    <section class="assignment-solution">
+
+        <button class="show-hide">Show solution</button>
+
+        <div class="assignment-code">
+﻿$(document).ready(function() {
+
+    function vowelCount(str) {
+        var vowels = ['a','e','i','o','u'],
+            vowelsCount = 0,
+            len;
+        str = str.split('');
+        len = str.length;
+        for (var i = 0; i &lt; len; i++){
+            if (vowels.indexOf(str[i].toLowerCase()) !== -1) {
+                vowelsCount++;
+            }
+        }
+        return vowelsCount;
+    }
+
+    $('.sort').click(function() {
+        var string = $('.data input').val(),
+            message = '';
+        if (string === '') {
+            message = 'Please enter a string in the field.';
+        } else {
+            message = 'Number of vowels in the string is: &lt;span&gt;' + vowelCount(string) + '&lt;/span&gt;';
+        }
+        $('.result p ').html(message);
+    });
+
+});
+        </div> <!-- End .assignment-code -->
+
+    </section> <!-- End .assignment-solution -->
+
+</section> <!-- End .assignment -->
+
+<script type="text/javascript">
+    $('button.show-hide').click(function() {
+        $('.assignment-code').toggle('slow');
+        if ($(this).text() === 'Show solution') {
+            $(this).text('Hide solution');
+        } else {
+            $(this).text('Show solution');
+        }
+    });
+</script>
+
+</body>
+</html>

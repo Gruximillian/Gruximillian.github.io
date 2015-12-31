@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Palindrome</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="../lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="../header.css">
+</head>
+<body>
+
+<header class="assignment">
+    <a href="../23_ex_oh_Coderbyte/index.html" class="prev">Ex Oh</a>
+    <a href="../index.html">Index</a>
+    <a href="../25_arith_geo_Coderbyte/index.html" class="next">Arith Geo</a>
+</header>
+
+<section class="assignment">
+
+    <section class="assignment-info">
+
+        <h1>Assignment 24 CB - Palindrome</h1>
+
+        <p class="assignment-text">
+          Have the function <span class="function-name">palindrome(str)</span> take the str parameter being passed and return the string true if the parameter is a palindrome, (the string is the same forward as it is backward) otherwise return the string false. For example: "racecar" is also "racecar" backwards. Punctuation and numbers will not be part of the string.
+        </p>
+
+    </section> <!-- End .assignment-info -->
+
+    <p class="instruction">Enter a string in the field to check if it is a palindrome.</p>
+
+    <section class="assignment-app">
+
+        <div class="data">
+
+            <input type="text" placeholder="Enter a string">
+            <button class="check">Check string</button>
+
+        </div>
+
+        <div class="result">
+            <p></p>
+        </div>
+
+    </section> <!-- End .assignment-app -->
+
+    <section class="assignment-solution">
+
+        <button class="show-hide">Show solution</button>
+
+        <div class="assignment-code">
+﻿$(document).ready(function() {
+
+  function palindrome(str) {
+    var len = str.length,
+        halfLen,
+        strNoSpaces = [];
+
+    str = str.split('');
+
+    for (var j = 0; j &lt; len; j++) {
+      if (str[j] !== ' ') strNoSpaces.push(str[j].toLowerCase()); <span class="code-comment">// Nevermind the spaces</span>
+    }
+
+    len = strNoSpaces.length;
+    halfLen = Math.floor(len / 2);
+
+    for (var i = 0; i &lt;= halfLen; i++) {
+      if (strNoSpaces[i] !== strNoSpaces[len - 1 - i]) return false;
+    }
+
+    return true;
+  }
+
+  $('.check').click(function() {
+    var string = $('.data input').val(),
+      message = '';
+    if (string === '') {
+      message = 'Please enter a string in the field.';
+    } else {
+      message = 'The string is palindrome: &lt;span&gt;' + palindrome(string) + '&lt;/span&gt;';
+    }
+    $('.result p ').html(message);
+  });
+
+});
+        </div> <!-- End .assignment-code -->
+
+    </section> <!-- End .assignment-solution -->
+
+</section> <!-- End .assignment -->
+
+<script type="text/javascript">
+    $('button.show-hide').click(function() {
+        $('.assignment-code').toggle('slow');
+        if ($(this).text() === 'Show solution') {
+            $(this).text('Hide solution');
+        } else {
+            $(this).text('Show solution');
+        }
+    });
+</script>
+
+</body>
+</html>

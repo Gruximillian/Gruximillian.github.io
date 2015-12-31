@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Random number in a range</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="../lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="../header.css">
+</head>
+<body>
+
+<header class="assignment">
+    <a href="../02_sum_and_multiply/index.html" class="prev">Sum and multiply</a>
+    <a href="../index.html">Index</a>
+    <a href="../04_evaluate_expression/index.html" class="next">Evaluate expression</a>
+</header>
+
+<section class="assignment">
+
+    <section class="assignment-info">
+
+        <h1>Assignment 03 - Random number in a given range</h1>
+
+        <p class="assignment-text">Create an expression using both <span class="function-name">Math.random()</span> and <span class="function-name">Math.floor()</span> to generate a random integer between two variables, high and low, where high is greater than low.</p>
+
+    </section> <!-- End .assignment-info -->
+
+    <p class="instruction">Enter smallest and highest number to determine the range.<br>
+        <span class="emph">Note:</span> You will get random number <span class="emph">between</span> these two values, not including them.<br>
+        To confirm new value, you must hit Enter key in the input filed.
+    </p>
+
+    <section class="assignment-app">
+
+        <div class="data">
+
+            <p class="numbers">
+                Low: <span class="low">1</span><input class="low" type="text">
+                <br>
+                high: <span class="high">10</span><input class="high" type="text">
+            </p>
+
+            <button class="enter-low">Enter lower</button>
+            <button class="enter-high">Enter higher</button>
+            <button class="recalculate">Recalculate</button>
+
+        </div>
+
+        <div class="result">
+            <p>Your random integer, between <span class="low">4</span> and <span class="high">10</span>, is <span class="random-number"></span>.</p>
+        </div>
+
+    </section> <!-- End .assignment-app -->
+
+    <section class="assignment-solution">
+
+        <button class="show-hide">Show solution</button>
+
+        <div class="assignment-code">
+﻿$(document).ready(function() {
+
+    function getNumbers(elements) {
+        var numbers = {};
+
+        numbers.low = parseInt($(elements).find('.low').text());
+        numbers.high = parseInt($(elements).find('.high').text());
+
+        if (numbers.low > numbers.high) { <span class="code-comment">// If user enters lower bound that is greater than the higher bound, switch them</span>
+            var temp = numbers.low;
+            numbers.low = numbers.high;
+            numbers.high = temp;
+        }
+
+        return numbers; <span class="code-comment">// Returns number object with number.low and number.high properties</span>
+    }
+
+    function generateRandomInteger(nums) {
+        $('span.low').text(nums.low);
+        $('span.high').text(nums.high);
+        if (Math.abs(nums.high - nums.low) === 1 || Math.abs(nums.high - nums.low) === 0) { <span class="code-comment">// There are no integers between two same numbers or between two subsequent integers</span>
+            alert('There are no integers between the given values. Try another combination of numbers.');
+            $('.random-number').text('not existent');
+            return;
+        };
+        $('.random-number').text(Math.floor(nums.low + 1 + Math.random() * (nums.high - 1 - nums.low)));
+    }
+
+    generateRandomInteger(getNumbers('.numbers'));
+
+<span class="code-comment">/**********************************************************************/</span>
+<span class="code-comment">/*****            EVENT HANDLING AND CONVENIENCE CODE             *****/</span>
+<span class="code-comment">/**********************************************************************/</span>
+
+    $('.enter-low').click(function() {
+        var low = $('.numbers .low').text() * 1;
+
+        $('input.high').hide();
+        $('.numbers span.high').show();
+
+        $('.numbers span.low').hide();
+        $('input.low').val(low).show().focus().select();
+    });
+
+    $('.enter-high').click(function() {
+        var high = $('.numbers .high').text() * 1;
+
+        $('input.low').hide();
+        $('.numbers span.low').show();
+
+        $('.numbers span.high').hide();
+        $('input.high').val(high).show().focus().select();
+    });
+
+    $('.recalculate').click(function() {
+        $('.numbers input').hide();
+        $('.numbers span').show();
+        generateRandomInteger(getNumbers('.numbers'));
+    });
+
+    $('.numbers').on('keydown', 'input', function(event) {
+        var newNumber = $(this).val() * 1,
+            key = event.which,
+            boundary = '.' + $(this).attr('class'), <span class="code-comment">// Class of a number, .low or .high</span>
+            parent = $(this).parent(); <span class="code-comment">// .numbers element</span>
+
+        if (key === 27) { <span class="code-comment">// Cancel editing</span>
+            $(this).hide(); <span class="code-comment">// Hide input</span>
+            parent.find('span' + boundary).show(); <span class="code-comment">// Show span again</span>
+        }
+
+        if (key === 13) {
+            $(this).hide(); <span class="code-comment">// Hide input</span>
+            parent.find('span' + boundary).text(newNumber).show(); <span class="code-comment">// Show span again</span>
+        }
+    });
+
+});
+        </div> <!-- End .assignment-code -->
+
+    </section> <!-- End .assignment-solution -->
+
+</section> <!-- End .assignment -->
+
+<script type="text/javascript">
+    $('button.show-hide').click(function() {
+        $('.assignment-code').toggle('slow');
+        if ($(this).text() === 'Show solution') {
+            $(this).text('Hide solution');
+        } else {
+            $(this).text('Show solution');
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Ex Oh</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="../lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="../header.css">
+</head>
+<body>
+
+<header class="assignment">
+    <a href="../22_word_count_Coderbyte/index.html" class="prev">Word count</a>
+    <a href="../index.html">Index</a>
+    <a href="../24_palindrome_Coderbyte/index.html" class="next">Palindrome</a>
+</header>
+
+<section class="assignment">
+
+    <section class="assignment-info">
+
+        <h1>Assignment 23 CB - Ex Oh</h1>
+
+        <p class="assignment-text">
+            Have the function <span class="function-name">ExOh(str)</span> take the str parameter being passed and return the string true if there is an equal number of x's and o's, otherwise return the string false. Only these two letters will be entered in the string, no punctuation or numbers. For example: if str is "xooxxxxooxo" then the output should return false because there are 6 x's and 5 o's.
+        </p>
+
+    </section> <!-- End .assignment-info -->
+
+    <p class="instruction">Enter a string of x's and o's in the field below..</p>
+
+    <section class="assignment-app">
+
+        <div class="data">
+
+            <input type="text" placeholder="Enter a string of x's and o's">
+            <button class="test">Test string</button>
+
+        </div>
+
+        <div class="result">
+            <p></p>
+        </div>
+
+    </section> <!-- End .assignment-app -->
+
+    <section class="assignment-solution">
+
+        <button class="show-hide">Show solution</button>
+
+        <div class="assignment-code">
+﻿$(document).ready(function() {
+
+  function ExOh(str) {
+    var xNum = 0,
+      oNum = 0,
+      len = str.length;
+    str = str.split('');
+    for (var i = 0; i &lt; len; i++) {
+      if (str[i] === 'x') {
+        xNum++;
+      } else if (str[i] === 'o') {
+        oNum++;
+      } else return 'Bad string!';
+    }
+    if (xNum === oNum) return true;
+    return false;
+  }
+
+  $('.test').click(function() {
+    var string = $('.data input').val(),
+      message = '';
+    if (string === '') {
+      message = 'Please enter a string of x\'s and o\'s in the field.';
+    } else {
+      message = 'Number of x\'s and o\'s is equal: &lt;span&gt;' + ExOh(string) + '&lt;/span&gt;';
+    }
+    $('.result p ').html(message);
+  });
+
+});
+        </div> <!-- End .assignment-code -->
+
+    </section> <!-- End .assignment-solution -->
+
+</section> <!-- End .assignment -->
+
+<script type="text/javascript">
+    $('button.show-hide').click(function() {
+        $('.assignment-code').toggle('slow');
+        if ($(this).text() === 'Show solution') {
+            $(this).text('Hide solution');
+        } else {
+            $(this).text('Show solution');
+        }
+    });
+</script>
+
+</body>
+</html>

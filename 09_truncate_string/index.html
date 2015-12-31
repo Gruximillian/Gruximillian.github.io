@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Truncate string</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="../lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="../header.css">
+</head>
+<body>
+
+<header class="assignment">
+    <a href="../08_most_frequent_array_item/index.html" class="prev">Array item</a>
+    <a href="../index.html">Index</a>
+    <a href="../10_reverse_string_Coderbyte/index.html" class="next">Reverse string</a>
+</header>
+
+<section class="assignment">
+
+    <section class="assignment-info">
+
+        <h1>Assignment 09 - Truncate string</h1>
+
+        <p class="assignment-text">
+            Write a JavaScript function to remove specified number of characters from a string.<br>
+            Test Data: console.log(<span class="function-name">truncate_string("Robin Singh”,4)</span>); "Robi"
+        </p>
+
+    </section> <!-- End .assignment-info -->
+
+    <p class="instruction">Enter a string and desired number of character to truncate. Meaning, the number of characters you want to be visible. So, '0' means empty string.</p>
+
+    <section class="assignment-app">
+
+        <div class="data">
+
+            <input class="string" type="text" placeholder="Enter string here"><br>
+            <input class="number" type="number" placeholder="0"><br>
+            <button class="truncate">Truncate</button>
+
+        </div>
+
+        <div class="result">
+            <p></p>
+        </div>
+
+    </section> <!-- End .assignment-app -->
+
+    <section class="assignment-solution">
+
+        <button class="show-hide">Show solution</button>
+
+        <div class="assignment-code">
+﻿$(document).ready(function() {
+
+    function truncateString(text, length) {
+        return text.slice(0, length);
+    }
+
+    $('.truncate').click(function() {
+        var text = $('.data input.string').val(),
+            length = $('.data input.number').val();
+
+        $('.result p').html('Truncated string is: "&lt;span&gt;' + truncateString(text, length) + '&lt;/span&gt;".');
+    });
+
+});
+        </div> <!-- End .assignment-code -->
+
+    </section> <!-- End .assignment-solution -->
+
+</section> <!-- End .assignment -->
+
+<script type="text/javascript">
+    $('button.show-hide').click(function() {
+        $('.assignment-code').toggle('slow');
+        if ($(this).text() === 'Show solution') {
+            $(this).text('Hide solution');
+        } else {
+            $(this).text('Show solution');
+        }
+    });
+</script>
+
+</body>
+</html>

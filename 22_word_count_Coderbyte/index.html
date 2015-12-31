@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Word count</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="../lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="../header.css">
+</head>
+<body>
+
+<header class="assignment">
+    <a href="../21_vowel_count_Coderbyte/index.html" class="prev">Vowel count</a>
+    <a href="../index.html">Index</a>
+    <a href="../23_ex_oh_Coderbyte/index.html" class="next">Ex Oh</a>
+</header>
+
+<section class="assignment">
+
+    <section class="assignment-info">
+
+        <h1>Assignment 22 CB - Word count</h1>
+
+        <p class="assignment-text">
+            Have the function <span class="function-name">wordCount(str)</span> take the str string parameter being passed and return the number of words the string contains (ie. "Never eat shredded wheat" would return 4).
+        </p>
+
+    </section> <!-- End .assignment-info -->
+
+    <p class="instruction">Enter an sentence in the field below.</p>
+
+    <section class="assignment-app">
+
+        <div class="data">
+
+            <input ytpe="text" placeholder="Enter an sentence">
+            <button class="count">Count words</button>
+
+        </div>
+
+        <div class="result">
+            <p></p>
+        </div>
+
+    </section> <!-- End .assignment-app -->
+
+    <section class="assignment-solution">
+
+        <button class="show-hide">Show solution</button>
+
+        <div class="assignment-code">
+﻿$(document).ready(function() {
+
+    function wordCount(str) {
+        var wordsNum = 0,
+            len;
+        str = str.split(' ');
+        len = str.length;
+        for (var i = 0; i &lt; len; i++) {
+            if (str[i].trim() !== '') wordsNum++; <span class="code-comment">// If words are separated by more than one space, we will have empty strings in the array, which we do not count</span>
+        }
+        return wordsNum;
+    }
+
+    $('.count').click(function() {
+        var string = $('.data input').val(),
+            message = '';
+        if (string === '') {
+            message = 'Please enter a string in the field.';
+        } else {
+            message = 'Alphabetized string is: &lt;span&gt;' + wordCount(string) + '&lt;/span&gt;';
+        }
+        $('.result p ').html(message);
+    });
+
+});
+        </div> <!-- End .assignment-code -->
+
+    </section> <!-- End .assignment-solution -->
+
+</section> <!-- End .assignment -->
+
+<script type="text/javascript">
+    $('button.show-hide').click(function() {
+        $('.assignment-code').toggle('slow');
+        if ($(this).text() === 'Show solution') {
+            $(this).text('Hide solution');
+        } else {
+            $(this).text('Show solution');
+        }
+    });
+</script>
+
+</body>
+</html>

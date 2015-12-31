@@ -1,0 +1,17 @@
+header a {
+    display: inline-block;
+    text-decoration: none;
+    border-radius: 7px;
+    padding: 5px 10px;
+    background-color: #888;
+    color: #000;
+}
+header {
+    text-align: center;
+}
+a.prev {
+    float: left;
+}
+a.next {
+    float: right;
+}

@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Change String</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="../lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="../header.css">
+</head>
+<body>
+
+<header class="assignment">
+    <a href="../10_reverse_string_Coderbyte/index.html" class="prev">Reverse string</a>
+    <a href="../index.html">Index</a>
+    <a href="../12_factorial_Coderbyte/index.html" class="next">Factorial</a>
+</header>
+
+<section class="assignment">
+
+    <section class="assignment-info">
+
+        <h1>Assignment 11 CB - Change String</h1>
+
+        <p class="assignment-text">
+            Have the function <span class="function-name">letterChanges(str)</span> take the str parameter being passed and modify it using the following algorithm. Replace every letter in the string with the letter following it in the alphabet (ie. c becomes d, z becomes a). Then capitalize every vowel in this new string (a, e, i, o, u) and finally return this modified string. 
+        </p>
+
+    </section> <!-- End .assignment-info -->
+
+    <p class="instruction">Enter a string to change.</p>
+    <section class="assignment-app">
+
+        <div class="data">
+
+            <input type="text" class="string">
+            <button class="change-string">Change string</button>
+
+        </div>
+
+        <div class="result">
+            <p></p>
+        </div>
+
+    </section> <!-- End .assignment-app -->
+
+    <section class="assignment-solution">
+
+        <button class="show-hide">Show solution</button>
+
+        <div class="assignment-code">
+﻿$(document).ready(function() {
+
+    function getString(element) {
+        return $(element).val();
+    }
+
+    function letterChanges(str) { 
+	    var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'],
+            strLen,
+            alphaLen,
+            vowels = ['a','e','i','o','u'],
+            newString;
+      if (str === '') return 'Enter a string, please!';
+      newString = str.toString().split('');
+      strLen = newString.length;
+      alphaLen = alphabet.length;
+      for (var i = 0; i &lt; strLen; i++) {
+      	for (var j = 0; j &lt; alphaLen; j++) {
+        	if (newString[i].toLowerCase() === alphabet[j]) {
+              	if (newString[i].toLowerCase() === 'z') {
+                	newString[i] = 'A';
+                	break;
+                } else {
+            		newString[i] = alphabet[j+1];
+                  	if (vowels.indexOf(newString[i]) !== -1) {
+                    	newString[i] = newString[i].toUpperCase();
+                    }
+                    break;
+                }
+            }
+        }
+      }
+      return newString.join('');
+    }
+
+    $('.change-string').click(function() {
+        $('.result p ').html('Changed string is: &lt;span&gt;' + letterChanges(getString('.data input')) + '&lt;/span&gt;');
+    });
+
+});
+
+        </div> <!-- End .assignment-code -->
+
+    </section> <!-- End .assignment-solution -->
+
+</section> <!-- End .assignment -->
+
+<script type="text/javascript">
+    $('button.show-hide').click(function() {
+        $('.assignment-code').toggle('slow');
+        if ($(this).text() === 'Show solution') {
+            $(this).text('Hide solution');
+        } else {
+            $(this).text('Show solution');
+        }
+    });
+</script>
+
+</body>
+</html>

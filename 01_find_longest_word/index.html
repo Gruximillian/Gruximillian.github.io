@@ -1,0 +1,195 @@
+<!DOCUMENT html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Find the Longest Word</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="../lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="../header.css">
+</head>
+<body>
+
+<header class="assignment">
+    <a href="../index.html" class="prev">Previous</a>
+    <a href="../index.html">Index</a>
+    <a href="../02_sum_and_multiply/index.html" class="next">Sum and multiply</a>
+</header>
+
+<section class="assignment">
+
+    <section class="assignment-info">
+
+        <h1>Assignment 1 - Find the Longest Word</h1>
+
+        <p class="assignment-text">Write a function <span class="function-name">findLongestWord()</span> that takes an array of words and returns
+        the length of the longest word.</p>
+
+    </section> <!-- End .assignment-info -->
+
+    <p class="instruction">Change some words in a given list below to see the code at work. Click on the word to edit it, leave empty filed to delete or click add button to add a new word to the list.</p>
+
+    <section class="assignment-app">
+
+        <div class="data">
+
+            <p class="array-code">wordsArray = [</p>
+
+            <ul class="array-code">
+                <li>'<span>sea</span><input type="text">',</li>
+                <li>'<span>mountain</span><input type="text">',</li>
+                <li>'<span>programming</span><input type="text">',</li>
+                <li>'<span>workout</span><input type="text">',</li>
+                <li>'<span>chainsaw</span><input type="text">',</li>
+                <li>'<span>miracle</span><input type="text">',</li>
+                <li>'<span>telephone</span><input type="text">'</li>
+            </ul>
+
+            <p class="array-code">]</p>
+
+        <button class="new-word">New word</button>
+        <button class="clear-words">Clear all</button>
+
+        </div>
+
+        <div class="result">
+            <p>The longest word in the array is "<span class="longest-word"></span>", in the position <span class="longest-word-index"></span>, with the length of <span class="longest-word-length"></span> characters.</p>
+        </div>
+
+    </section> <!-- End .assignment-app -->
+
+    <section class="assignment-solution">
+
+        <button class="show-hide">Show solution</button>
+
+        <div class="assignment-code">
+$(document).ready(function() {
+            <div class="problem-solution">
+
+    function getWords() { <span class="code-comment">// Get array of words from a list of elements and returns it</span>
+        var wordsSet = $('.array-code li span'),
+            wordsArray = [];
+        $.each(wordsSet, function(index, value) {
+            wordsArray[index] = $(value).text();
+        });
+        return wordsArray;
+    }
+
+    function findTheLongestWord(array) {
+        var maxWordLength = 0,
+            longestWordIndex = 0;
+
+        array.forEach(function(element, index, array) {
+            if (element.length > maxWordLength) {
+                maxWordLength = element.length;
+                longestWordIndex = index;
+            }
+        });
+
+        return { <span class="code-comment">// We are returning an object with the longest word, its position in the array and its length</span>
+                word: array[longestWordIndex],
+                position: longestWordIndex,
+                wordLength: array[longestWordIndex].length
+                };
+    }
+
+    function printTheLongestWord(wordObject) {
+        var longestWord = document.querySelector('.longest-word'),
+            longestWordIndex = document.querySelector('.longest-word-index'),
+            longestWordLength = document.querySelector('.longest-word-length');
+
+        longestWord.innerHTML = wordObject.word;
+        longestWordIndex.innerHTML = wordObject.position;
+        longestWordLength.innerHTML = wordObject.wordLength;
+    }
+
+    printTheLongestWord(findTheLongestWord(getWords()));
+
+            </div> <!-- End .problem-solution -->
+            <div class="ui-code">
+
+<span class="code-comment">/**********************************************************************/</span>
+<span class="code-comment">/*****            EVENT HANDLING AND CONVENIENCE CODE             *****/</span>
+<span class="code-comment">/**********************************************************************/</span>
+
+    $('ul.array-code').on('click', 'span', function() {
+        var parent = $(this).parent(), <span class="code-comment">// li element</span>
+            oldWord = $(this).text();
+
+        $('input').hide(); <span class="code-comment">// Hide any already openned input fields</span>
+        $('input').parent().find('span').show(); <span class="code-comment">// Show any hidden spans</span>
+        $(this).hide(); <span class="code-comment">// Hide span that is currently being edited</span>
+        parent.find('input').show().val(oldWord).focus();
+        $('button.new-word').attr('disabled', 'disabled');
+    });
+
+    $('ul.array-code').on('keydown', 'input', function(event) {
+        var key = event.which,
+            parent = $(this).parent(), <span class="code-comment">// li element</span>
+            newWord,
+            nextElement = parent.next(),
+            previousElement = parent.prev(),
+            previousElementText = previousElement.find('span').text();
+
+        if (key === 27) { <span class="code-comment">// On Esc remove input filed for new word or hide it if editing existing word</span>
+            if ($(this).hasClass('new-word')) {
+                parent.remove();
+            } else {
+                $(this).hide();
+                parent.find('span').show();
+            }
+            $('button.new-word').removeAttr('disabled');
+        }
+
+        if (key === 13) {
+            newWord = $(this).val();
+            if (!newWord) { <span class="code-comment">// If there are no characters in the input filed, then delete list item</span>
+                parent.remove();
+                if (!nextElement.html()) { <span class="code-comment">// If we are removing last item, then remove comma from the previous item</span>
+                    previousElement.empty();
+                    previousElement.append('\'&lt;span&gt;' + previousElementText + '&lt;/span&gt;&lt;input type="text"&gt;\'');
+                    $('button.new-word').removeAttr('disabled');
+                }
+            } else if ($(this).hasClass('new-word')) { <span class="code-comment">// If enetering new word, then add comma to the previous list item</span>
+                previousElement.html(previousElement.html() + ',');
+                $('button.new-word').removeAttr('disabled');
+            }
+            
+            $(this).removeClass('new-word').hide(); <span class="code-comment">// After adding new list item, remove class .new-word and hide input filed</span>
+            parent.find('span').removeClass('new-word').show().text(newWord);  <span class="code-comment">// Remove class .new-word from the span element, show it and populate with entered word</span>
+            $('button.new-word').removeAttr('disabled');
+            printTheLongestWord(findTheLongestWord(getWords())); <span class="code-comment">// Lastly, determine new longest word</span>
+        }
+    });
+
+    $('button.new-word').click(function() { <span class="code-comment">// Add new list item with span and input elements</span>
+        $('ul.array-code').append('&lt;li&gt;\'&lt;span class="new-word"&gt;&lt;/span&gt;&lt;input class="new-word" placeholder="Enter new word"&gt;\'&lt;/li&gt;');
+        $('input.new-word').show().focus();
+        $(this).attr('disabled', 'disabled');
+    });
+
+    $('button.clear-words').click(function() {
+        $('ul.array-code').empty(); <span class="code-comment">// Clear all words from the array</span>
+    });
+
+});
+            </div> <!-- End .ui-code -->
+        </div> <!-- End .assignment-code -->
+
+    </section> <!-- End .assignment-solution -->
+
+</section> <!-- End .assignment -->
+
+<script type="text/javascript">
+    $('button.show-hide').click(function() {
+        $('.assignment-code').toggle('slow');
+        if ($(this).text() === 'Show solution') {
+            $(this).text('Hide solution');
+        } else {
+            $(this).text('Show solution');
+        }
+    });
+</script>
+
+</body>
+</html>

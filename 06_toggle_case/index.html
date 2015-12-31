@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Toggle Case</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="../lib/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="../header.css">
+</head>
+<body>
+
+<header class="assignment">
+    <a href="../05_number_dash/index.html" class="prev">Number Dash</a>
+    <a href="../index.html">Index</a>
+    <a href="../07_temperature/index.html" class="next">Temperature converter</a>
+</header>
+
+<section class="assignment">
+
+    <section class="assignment-info">
+
+        <h1>Assignment 06 - Toggle Case</h1>
+
+        <p class="assignment-text">Write a JavaScript program that accepts a string as input and swap the 
+case of each character. For example if you input 'The Quick Brown Fox' the output should 
+be 'tHE qUICK bROWN fOX'.</p>
+
+    </section> <!-- End .assignment-info -->
+
+    <p class="instruction">Write some text in the input field below.</p>
+
+    <section class="assignment-app">
+
+        <div class="data">
+
+            <input type="text" placeholder="Add some text here">
+            <button class="toggle">Toggle case</button>
+
+        </div>
+
+        <div class="result">
+            <p></p>
+        </div>
+
+    </section> <!-- End .assignment-app -->
+
+    <section class="assignment-solution">
+
+        <button class="show-hide">Show solution</button>
+
+        <div class="assignment-code">
+$(document).ready(function() {
+
+    String.prototype.toggleCase = function() {
+        var stringArray = this.valueOf().split(''); <span class="code-comment">// Turn string into array</span>
+
+        stringArray = stringArray.map(function(current, index, stringArray) {
+            if (current.toLowerCase() === current) {
+                return current.toUpperCase(); <span class="code-comment">// If a character is lowercase, switch to uppercase</span>
+            } else {
+                return current.toLowerCase(); <span class="code-comment">// Else, switch to lowercase</span>
+            }
+        });
+        return stringArray.join(''); <span class="code-comment">// Join array into string again</span>
+    }
+
+    $('.toggle').click(function() {
+        var stringText = $('.data input').val(),
+            emptyField = stringText.split(' ').join(''); <span class="code-comment">// If this gives an emptty string, then only spaces are entered</span>
+        if (emptyField === '') {
+            $('.result p').html('Please enter some visible characters.');
+        } else {
+            $('.result p').html('Toggled string is: &lt;span&gt;' + stringText.toggleCase() + '&lt;/span&gt;');
+        }
+    });
+
+});
+
+        </div> <!-- End .assignment-code -->
+
+    </section> <!-- End .assignment-solution -->
+
+</section> <!-- End .assignment -->
+
+<script type="text/javascript">
+    $('button.show-hide').click(function() {
+        $('.assignment-code').toggle('slow');
+        if ($(this).text() === 'Show solution') {
+            $(this).text('Hide solution');
+        } else {
+            $(this).text('Show solution');
+        }
+    });
+</script>
+
+</body>
+</html>
