@@ -1,3 +1,3 @@
 # Gruximillian.github.io
 
-This are finished assignments for precourse practice at Modern Developer
+This are [finished assignments](http://gruximillian.github.io) for precourse practice at Modern Developer
